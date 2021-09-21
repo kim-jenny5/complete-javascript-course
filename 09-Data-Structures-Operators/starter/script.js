@@ -27,3 +27,6 @@ const restaurant = {
     },
   },
 };
+
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(menu);
