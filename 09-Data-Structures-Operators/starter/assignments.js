@@ -104,22 +104,74 @@
 // }
 // console.log(scorers);
 
-// Mini Challenge
-const question = new Map([
-  ['question', 'What is the best programming language in the world?'],
-  [1, 'C'],
-  [2, 'Java'],
-  [3, 'JavaScript'],
-  ['correct', 3],
-  [true, 'Correct 🎉'],
-  [false, 'Try again!'],
-]);
+// // Mini Challenge
+// const question = new Map([
+//   ['question', 'What is the best programming language in the world?'],
+//   [1, 'C'],
+//   [2, 'Java'],
+//   [3, 'JavaScript'],
+//   ['correct', 3],
+//   [true, 'Correct 🎉'],
+//   [false, 'Try again!'],
+// ]);
 
-const answer = Number(prompt('Your answer'));
-// const answer = 3;
+// const answer = Number(prompt('Your answer'));
 
-if (answer === question.get('correct')) {
-  console.log(question.get(true));
-} else {
-  console.log(question.get(false));
-}
+// if (answer === question.get('correct')) {
+//   console.log(question.get(true));
+// } else {
+//   console.log(question.get(false));
+// }
+
+// // 👉🏻 CODING CHALLENGE 3
+// const gameEvents = new Map([
+//   [17, "⚽️ GOAL"],
+//   [36, "🔁 Substitution"],
+//   [47, "⚽️ GOAL"],
+//   [61, "🔁 Substitution"],
+//   [64, "🔶 Yellow card"],
+//   [69, "🔴 Red card"],
+//   [70, "🔁 Substitution"],
+//   [72, "🔁 Substitution"],
+//   [76, "⚽️ GOAL"],
+//   [80, "⚽️ GOAL"],
+//   [92, "🔶 Yellow card"],
+// ]);
+
+// // (1)
+// const events = [...new Set(gameEvents.values())];
+// console.log(events);
+
+// // (2)
+// gameEvents.delete(64);
+// console.log(gameEvents);
+
+// // (3)
+// console.log(
+//   `An event happened, on average, every ${90 / gameEvents.size} minutes.`
+// );
+
+// //4
+// for (const [time, event] of gameEvents) {
+//   const when = time <= 45 ? `FIRST` : `SECOND`;
+//   console.log(`[${when} HALF] ${time}: ${event}`);
+// }
+
+// 👉🏻 CODING CHALLENGE 4
+document.body.append(document.createElement("textarea"));
+document.body.append(document.createElement("button"));
+const button = document.querySelector("button");
+button.innerText = "GO";
+
+button.addEventListener("click", () => {
+  const text = document.querySelector("textarea").value;
+  const arr = text.split("\n");
+  for (let i = 0; i < arr.length; i++) {
+    const word = arr[i].trim();
+    const wordArr = word.split("_");
+    const first = wordArr[1].slice(0, 1).toUpperCase();
+    const rest = wordArr[1].slice(1).toLowerCase();
+    const second = first + rest;
+    console.log(`${wordArr[0]}${second} ${"✅".repeat(i + 1)}`);
+  }
+});
