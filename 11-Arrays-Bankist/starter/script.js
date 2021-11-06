@@ -220,7 +220,7 @@ const startLogOutTimer = () => {
 
 let currentAccount, timer;
 
-// FAKE ALWAYS LOGGED IN
+// NOTE: FAKE ALWAYS LOGGED IN
 // currentAccount = account1;
 // updateUI(currentAccount);
 // containerApp.style.opacity = 100;
