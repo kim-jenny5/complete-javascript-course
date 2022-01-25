@@ -114,6 +114,7 @@ const getJSON = function (url, errorMsg = "Something went wrong") {
 
 // whereAmI();
 
+// 👉🏻 CODING CHALLENGE #2
 const wait = (seconds) => {
 	return new Promise((resolve) => {
 		setTimeout(resolve, seconds * 1000);
@@ -156,6 +157,8 @@ let imgEl;
 // 		return createImage("./img/img-3.jpg");
 // 	})
 // 	.catch((err) => alert(err));
+
+////////////////////////////////////////
 
 const getPosition = () => {
 	return new Promise(function (resolve, reject) {
@@ -232,4 +235,84 @@ const get3Countries = async function (c1, c2, c3) {
 	}
 };
 
-get3Countries("Korea", "Japan", "United States of America");
+// get3Countries("Korea", "Japan", "United States of America");
+
+// Promise.race()
+const promiseRace = async function () {
+	const resp = await Promise.race([
+		getJSON(`https://restcountries.com/v2/name/japan`),
+		getJSON(`https://restcountries.com/v2/name/italy`),
+		getJSON(`https://restcountries.com/v2/name/spain`)
+	]);
+	// console.log(resp[0]);
+};
+
+promiseRace();
+
+// This is useful for making a promise quit if it takes too long.
+const timeout = function (sec) {
+	return new Promise(function (_, reject) {
+		setTimeout(function () {
+			reject(new Error("Request took too long."), sec);
+		});
+	});
+};
+
+// Promise.race([getJSON(`https://restcountries.com/v2/name/japan`), timeout(1)])
+// 	.then((resp) => console.log(resp[0]))
+// 	.catch((err) => console.log(err));
+
+// Promise.allSettled([
+// 	Promise.resolve("Success"),
+// 	Promise.reject("Error"),
+// 	Promise.resolve("Another success")
+// ]).then((resp) => console.log(resp));
+
+// Promise.all([
+// 	Promise.resolve("Success"),
+// 	Promise.reject("Error"),
+// 	Promise.resolve("Another success")
+// ]).then((resp) => console.log(resp));
+
+// Promise.any([
+// 	Promise.resolve("Success"),
+// 	Promise.reject("Error"),
+// 	Promise.resolve("Another success")
+// ]).then((resp) => console.log(resp));
+
+// 👉🏻 CODING CHALLENGE #3
+const loadNPause = async () => {
+	try {
+		let img = await createImage("./img/img-1.jpg");
+		await wait(2);
+		img.style.display = "none";
+
+		img = await createImage("./img/img-2.jpg");
+		await wait(2);
+		img.style.display = "none";
+
+		img = await createImage("./img/img-3.jpg");
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+// loadNPause();
+
+const loadAll = async (imgArr) => {
+	try {
+		const imgs = imgArr.map(async (img) => {
+			return await createImage(img);
+		});
+		const imgsEl = await Promise.all(imgs);
+		console.log(imgsEl);
+		console.log(imgs);
+		for (const img of imgsEl) {
+			img.setAttribute("class", "parallel");
+		}
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+loadAll(["img/img-1.jpg", "img/img-2.jpg", "img/img-3.jpg"]);
