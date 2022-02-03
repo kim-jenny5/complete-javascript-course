@@ -209,7 +209,7 @@ const startLogOutTimer = () => {
 		time--;
 	};
 
-	// Set time to 5 minutes
+	// Set time to 5 minutesomos.
 	let time = 300;
 
 	// Call the timer every second
